@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <listeners>
+        <listener class-name="fontexplorerx.utility.ListenerClass"></listener>
+    </listeners>
+    <test thread-count="5" name="Test_All">
+        <parameter name="browser" value="Chrome"></parameter>
+        <classes>
+            <class name="fontexplorerx.testcases.IndexPageTest" />
+            <class name="fontexplorerx.testcases.LoginPageTest" />
+            <class name="fontexplorerx.testcases.ProductPageTest" />
+            <class name="fontexplorerx.testcases.AddToCartPageTest" />
+            <class name="fontexplorerx.testcases.CheckoutPageTest" />
+            <class name="fontexplorerx.testcases.EndToEndTest" />
+            <class name="fontexplorerx.testcases.FreeTrialPageTest" />
+            <class name="fontexplorerx.testcases.CreateAccountPageTest" />
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
