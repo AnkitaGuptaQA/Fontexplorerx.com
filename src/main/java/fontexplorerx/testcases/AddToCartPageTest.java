@@ -18,10 +18,13 @@ public class AddToCartPageTest extends BaseClass {
         Log.startTestCase("addToCartTest");
         Log.info("Navigated to the index page.");
         indexPage = new IndexPage();
+
         Log.info("Navigated to the Products page");
         productsPage = indexPage.clickOnProduct();
+
         Log.info("Click on the pro button");
         addToCartPage = productsPage.clickOnProButton();
+
         Log.info("Enter the quantity of the license.");
         addToCartPage.enterqqantity(prop.getProperty("licenseQuan"));
         Double licQuantity = Double.valueOf((prop.getProperty("licenseQuan")));
@@ -33,9 +36,18 @@ public class AddToCartPageTest extends BaseClass {
         Thread.sleep(2000);
         Double totalPrice = addToCartPage.getTotalPrice();
         System.out.println("The total price is: " +totalPrice);
+
         Log.info("Validate the unit price and the total price.");
         Assert.assertEquals(totalPrice,totalExpectedPrice);
+
+        Log.info("Validate the promo code");
+        addToCartPage.clickOnRedeem();
+        boolean validatepromo = addToCartPage.verifyFieldValidation();
+        Assert.assertTrue(true);
+
+        Log.info("Navigate to the checkout page.");
         addToCartPage.proceedToCheckout();
+
         Log.endTestCase("addToCartTest");
 
 

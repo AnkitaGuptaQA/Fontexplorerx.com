@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class FreeTrialPage extends BaseClass {
 
-    @FindBy(xpath = "/html/body/div[1]/div/section/div[2]/div/h2")
+    @FindBy(xpath = "//h2[@class='trial-header']")
     WebElement freeTrialTitle;
 
     @FindBy(id = "fieldName")
@@ -20,8 +20,17 @@ public class FreeTrialPage extends BaseClass {
     @FindBy(xpath = "//*[@id=\"HasAgreed\"]")
     WebElement checkbox;
 
-    @FindBy(xpath = "/html/body/div[3]/div/section/div[2]/div/div/section[2]/div/form/button")
+    @FindBy(xpath = "//button[normalize-space()='Download Free Trial']")
     WebElement downloadft;
+
+    @FindBy(xpath = "//span[@class='field-validation-error']")
+    WebElement emailError;
+
+    @FindBy(xpath = "//span[@data-valmsg-for='HasAgreed']")
+    WebElement checkoutError;
+
+    @FindBy(xpath = "//div[@class='trial-content']//p[1]")
+    WebElement alreadyUsedEmail;
 
     public FreeTrialPage(){
         PageFactory.initElements(getDriver(),this);
@@ -43,10 +52,31 @@ public class FreeTrialPage extends BaseClass {
         Action.implicitWait(getDriver(),15);
         Action.fluentWait(getDriver(),downloadft,10);
         Thread.sleep(50);
-        Action.click(getDriver(),downloadft);
-
         return new FreeTrialPage();
     }
+
+    public FreeTrialPage clickDownload() throws Throwable {
+        Action.click(getDriver(),downloadft);
+        return new FreeTrialPage();
+    }
+
+    public FreeTrialPage checkValidation() throws Throwable {
+        Action.click(getDriver(),downloadft);
+        return new FreeTrialPage();
+    }
+
+    public FreeTrialPage validationMessage() throws Throwable {
+//        WebElement emailvalidate = emailError.getText();
+        Action.isDisplayed(getDriver(),emailError);
+        Action.isDisplayed(getDriver(),checkoutError);
+        return new FreeTrialPage();
+    }
+
+    public FreeTrialPage usedEmailMessage() throws Throwable {
+        Action.isDisplayed(getDriver(),alreadyUsedEmail);
+        return new FreeTrialPage();
+    }
+
 
 
 

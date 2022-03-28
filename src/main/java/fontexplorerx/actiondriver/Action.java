@@ -6,6 +6,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -210,11 +214,11 @@ public class Action extends BaseClass {
         }
     }
 
-    public static boolean JSClick(WebElement ele) throws Throwable {
+    public static boolean JSClick(WebDriver driver, WebElement ele) throws Throwable {
         boolean flag = false;
         try {
             // WebElement element = driver.findElement(locator);
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            JavascriptExecutor executor = (JavascriptExecutor) BaseClass.driver;
             executor.executeScript("arguments[0].click();", ele);
             // driver.executeAsyncScript("arguments[0].click();", element);
             flag = true;
@@ -583,7 +587,7 @@ public class Action extends BaseClass {
     }
 
 
-    public static boolean isAlertPresent() throws Throwable {
+    public static boolean isAlertPresent(WebDriver driver) throws Throwable {
         try
         {
             getDriver().switchTo().alert();
@@ -666,15 +670,15 @@ public class Action extends BaseClass {
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot takesScreenshot = (TakesScreenshot) getDriver();
         File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-       // String destination = System.getProperty("user.dir") + "\\ScreenShots\\" + filename + "_" + dateName + ".png";
-        String destination = "/Users/fexuser/IdeaProjects/Fontexplorerx.com/src/main/java/fontexplorerx/Screenshots" + filename + "_" + dateName + ".png";
+        //String destination = System.getProperty("user.dir") + "\\ScreenShots\\" + filename + "_" + dateName + ".png";
+        String destination = "/Users/fexuser/IdeaProjects/Fontexplorerx.com/Screenshots" + filename + "_" + dateName + ".png";
         try {
             FileUtils.copyFile(source, new File(destination));
         } catch (Exception e) {
             e.getMessage();
         }
         // This new path for jenkins
-        String newImageString = "/Users/fexuser/IdeaProjects/Fontexplorerx.com/src/main/java/fontexplorerx/Screenshots/" + filename + "_"
+        String newImageString = "/Users/fexuser/IdeaProjects/Fontexplorerx.com/Screenshots" + filename + "_"
                 + dateName + ".png";
         return newImageString;
     }
@@ -696,5 +700,32 @@ public class Action extends BaseClass {
 
         return flag;
     }
+    public static String fileUpload (String path) throws AWTException {
+        StringSelection strSelection = new StringSelection(path);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(strSelection, null);
+        Robot robot = new Robot();
+        robot.delay(300);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.delay(200);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        return path;
+    }
+
+    public static void fileDownload() throws AWTException {
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_TAB);
+        robot.keyRelease(KeyEvent.VK_TAB);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+
+    }
+
 
 }

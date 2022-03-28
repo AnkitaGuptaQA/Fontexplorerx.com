@@ -7,7 +7,24 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class IndexPage extends BaseClass {
-    @FindBy(xpath = "/html[1]/body[1]/div[3]/header[1]/div[1]/div[1]/div[2]/a[1]")
+
+    //Redirect to the free trial page by link text
+//    @FindBy(xpath = "html body div.page header.page-header div.header-inner nav.page-nav a.nav-item")
+//    WebElement freeTriallink;
+    @FindBy(linkText = "Free Trial")
+    WebElement freeTrial;
+//    @FindBy(css = "body > div.page > header > div.header-inner > nav > a:nth-child(1)")
+//    WebElement freeTriallink;
+
+    //Redirect to the free trial page by download button
+    @FindBy(xpath = "//a[normalize-space()='Download a 14-day free trial']")
+    WebElement downloadButtonFreeTrial;
+
+
+    // login or signup button
+
+
+    @FindBy(xpath = "//a[normalize-space()='Login or sign up']")
     WebElement signInButton;
 
     @FindBy(xpath = "/html[1]/body[1]/div[3]/header[1]/div[2]/a[1]")
@@ -19,19 +36,14 @@ public class IndexPage extends BaseClass {
     @FindBy(xpath = "/html[1]/body[1]/div[1]/header[1]/div[2]/a[2]")
     WebElement buyNowButton;
 
-//    @FindBy(xpath = "html body div.page header.page-header div.header-inner nav.page-nav a.nav-item")
-//    WebElement freeTriallink;
 
-    @FindBy(css = "body > div.page > header > div.header-inner > nav > a:nth-child(1)")
-    WebElement freeTriallink;
-
-    @FindBy(xpath = "/html[1]/body[1]/div[1]/header[1]/div[2]/nav[1]/a[2]")
+    @FindBy(linkText = "Features")
     WebElement featureLink;
 
-    @FindBy(css = "a.nav-item:nth-child(3)")
+    @FindBy(xpath = "//a[normalize-space()='Products']")
     WebElement productLink;
 
-    @FindBy(xpath = "/html/body/div[3]/header/div[2]/nav/a[4]")
+    @FindBy(linkText = "Help")
     WebElement helpLink;
 
     @FindBy(xpath = "/html[1]/body[1]/div[3]/header[1]/div[2]/nav[1]/a[5]")
@@ -50,14 +62,19 @@ public class IndexPage extends BaseClass {
         return indextitle;
     }
 
-    public LoginPage clickOnSignIn() throws Throwable {
-        Action.click(getDriver(),signInButton);
-        return new LoginPage();
+    public FreeTrialPage clickOnDownloadTrial() throws Throwable {
+        Action.click(getDriver(),downloadButtonFreeTrial);
+        return new FreeTrialPage();
     }
 
     public FreeTrialPage clickOnFreeTrial() throws Throwable {
-        Action.click(getDriver(),freeTriallink);
+        Action.click(getDriver(),freeTrial);
         return new FreeTrialPage();
+    }
+
+    public LoginPage clickOnSignIn() throws Throwable {
+        Action.click(getDriver(),signInButton);
+        return new LoginPage();
     }
 
     public ProductsPage clickOnProduct() throws Throwable{
@@ -68,6 +85,16 @@ public class IndexPage extends BaseClass {
     public AddToCartPage clickOnCart () throws Throwable {
         Action.click(getDriver(),cartIcon);
         return new AddToCartPage();
+    }
+
+    public FeaturesPage clickOnFeatures() throws Throwable {
+        Action.click(getDriver(),featureLink);
+        return new FeaturesPage();
+    }
+
+    public HelpPage clickOnHelp() throws Throwable {
+        Action.click(getDriver(),helpLink);
+        return new HelpPage();
     }
 
 

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BaseClass{
 
     @FindBy(id = "signInEmail")
     WebElement email;
@@ -47,6 +47,9 @@ public class LoginPage {
     @FindBy(xpath = "/html/body/div[3]/div/section/div[2]/div/section/h1")
     WebElement loginTitle;
 
+    @FindBy(linkText = "Forgot your password?")
+    WebElement forgotPasswordButton;
+
     public LoginPage(){
         PageFactory.initElements(BaseClass.getDriver(), this);
     }
@@ -80,5 +83,9 @@ public class LoginPage {
         Action.type(signUpPasswordConfirmation,signuppasswordconfirm);
         Action.click(BaseClass.getDriver(),createNewAccount);
         return new HomePage();
+    }
+    public ForgotPasswordPage clickOnForgotPassword() throws Throwable {
+        Action.click(getDriver(),forgotPasswordButton);
+        return new ForgotPasswordPage();
     }
 }
