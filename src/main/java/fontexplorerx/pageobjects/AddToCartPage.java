@@ -8,16 +8,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AddToCartPage extends BaseClass {
 
-    @FindBy(xpath = "//*[@id=\"dbcms-content-1t12\"]/table/tbody/tr/td")
+    @FindBy(xpath = "//td[normalize-space()='Your cart is empty']")
     WebElement emptyCart;
 
-    @FindBy(xpath = "/html[1]/body[1]/div[1]/header[1]/div[2]/nav[1]/a[3]")
+    @FindBy(xpath = "//a[normalize-space()='Products']")
     WebElement redirectProduct;
 
     @FindBy(id = "LicenseQuantity")
     WebElement licQuantity;
 
-    @FindBy(xpath = "/html/body/div[1]/div/section/div[2]/div/table/tfoot/tr[3]/td/a")
+    @FindBy(xpath = "//a[@class='btn-blue']")
     WebElement proCheckout;
 
     @FindBy(xpath = "/html/body/div[1]/div/section/div[2]/div/table/tbody/tr/td[4]")
@@ -28,8 +28,17 @@ public class AddToCartPage extends BaseClass {
 //    @FindBy(css = ".cart-total > span:nth-child(1)")
 //    WebElement totalprice;
 
-    @FindBy(xpath = "/html/body/div[1]/div/section/div[1]/div/section/h1")
+    @FindBy(xpath = "//h1[normalize-space()='Your Cart']")
     WebElement cartTitle;
+
+    @FindBy(xpath = "//input[@id='VoucherCode']")
+    WebElement voucherInputField;
+
+    @FindBy(xpath = "//button[normalize-space()='Redeem']")
+    WebElement redeemButton;
+
+    @FindBy(xpath = "//span[@class='field-validation-error']")
+    WebElement fieldValidation;
 
     public AddToCartPage(){
         PageFactory.initElements(getDriver(),this);
@@ -77,6 +86,15 @@ public class AddToCartPage extends BaseClass {
         public LoginPage proceedToCheckout() throws Throwable {
             Action.click(getDriver(),proCheckout);
             return new LoginPage();
+        }
+
+        public AddToCartPage clickOnRedeem() throws Throwable {
+        Action.click(getDriver(),redeemButton);
+        return new AddToCartPage();
+        }
+
+        public boolean verifyFieldValidation() throws Throwable{
+        return Action.isDisplayed(getDriver(),fieldValidation);
         }
 
     }

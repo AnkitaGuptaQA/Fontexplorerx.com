@@ -29,7 +29,7 @@ public class IndexPageTest extends BaseClass {
         Log.startTestCase("Verifytitle");
         Log.info("Validate the title of the index page.");
         String acttitle = indexPage.getIndexPageTitle();
-        Assert.assertEquals(acttitle,"Font Manager for Mac with Free Trial | FontExplorer® X Pro0");
+        Assert.assertEquals(acttitle,"Font Manager for Mac with Free Trial | FontExplorer® X Pro");
         Log.endTestCase("Verifytitle");
     }
 
